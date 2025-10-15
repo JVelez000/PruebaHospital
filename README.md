@@ -94,10 +94,23 @@ https://localhost:7000
 *(Port may vary — check the console for details.)*
 
 ## 📸 What It Looks Like
-- **Home/Dashboard**: quick stats and shortcuts to everything.  
-- **Patients**: list, create, edit, and delete with confirmation.  
-- **Doctors**: list, filter by specialty, and add new ones.  
-- **Appointments**: schedule, validate conflicts, change status, and view email history.
+<!-- TITLE HERE -->
+![Screenshot 1](ScreenShots/Imagen%20pegada.png)
+
+<!-- TITLE HERE -->
+![Screenshot 2](ScreenShots/Imagen%20pegada%20(2).png)
+
+<!-- TITLE HERE -->
+![Screenshot 3](ScreenShots/Imagen%20pegada%20(3).png)
+
+<!-- TITLE HERE -->
+![Screenshot 4](ScreenShots/Imagen%20pegada%20(4).png)
+
+<!-- TITLE HERE -->
+![Screenshot 5](ScreenShots/Imagen%20pegada%20(5).png)
+
+<!-- TITLE HERE -->
+![Screenshot 6](ScreenShots/Imagen%20pegada%20(6).png)
 
 ## 🔒 Security & Validations
 - Unique document ID for patients and doctors.  
