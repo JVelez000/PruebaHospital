@@ -192,7 +192,6 @@
     }
 </div>
 
-<!-- Modal de confirmación -->
 <div class="modal fade" id="deleteModal" tabindex="-1">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content border-0 shadow">
@@ -224,7 +223,7 @@
 </div>
 
 @section Scripts {
-<script>
+    <script>
     function confirmDelete(id, name) {
         const modalText = document.getElementById("modalText");
         const form = document.getElementById("deleteForm");
@@ -236,7 +235,6 @@
         modal.show();
     }
 
-    // Filtro por especialidad
     document.getElementById('filterBtn').addEventListener('click', function() {
         const speciality = document.getElementById('specialityFilter').value;
         if (speciality) {
@@ -248,14 +246,13 @@
         window.location.href = '/Doctors/Index';
     });
 
-    // Presionar Enter en el filtro
     document.getElementById('specialityFilter').addEventListener('keypress', function(e) {
         if (e.key === 'Enter') {
             document.getElementById('filterBtn').click();
         }
     });
 </script>
-
+}
 <style>
     .doctor-card {
         transition: all 0.3s ease;

@@ -31,8 +31,7 @@ namespace PruebaHospital.Validators
 
             RuleFor(d => d.Phone)
                 .Matches(@"^\d{10}$").WithMessage("El teléfono debe tener exactamente 10 dígitos");
-
-            // Validación: no puede haber mismo nombre y especialidad
+            
             RuleFor(d => d)
                 .Must(BeUniqueNameAndSpeciality).WithMessage("Ya existe un médico con el mismo nombre y especialidad");
         }

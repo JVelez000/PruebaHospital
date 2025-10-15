@@ -64,8 +64,7 @@ namespace PruebaHospital.Repositories
                 .ThenBy(a => a.Time)
                 .ToList();
         }
-
-        // 🔥 VALIDACIONES DE CONFLICTO (Requisito clave)
+        
         public bool HasDoctorAppointmentAtTime(int doctorId, DateTime date, TimeSpan time, int excludeAppointmentId = 0)
         {
             return _context.Appointments
@@ -90,8 +89,7 @@ namespace PruebaHospital.Repositories
         {
             return !HasDoctorAppointmentAtTime(doctorId, date, time, excludeAppointmentId);
         }
-
-        // Métodos para estadísticas
+        
         public int GetAppointmentCountByStatus(AppointmentStatus status)
         {
             return _context.Appointments.Count(a => a.Status == status);

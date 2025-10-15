@@ -17,5 +17,5 @@ Fase	Carpeta	Qué contiene	Prioridad
 5 = done
 6 = done
 7 = done
-8 = 
-9 = 
+8 = done
+9 = done

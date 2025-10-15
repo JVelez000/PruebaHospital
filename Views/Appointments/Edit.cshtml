@@ -20,7 +20,6 @@
                 @Html.AntiForgeryToken()
                 <input type="hidden" asp-for="Id" />
 
-                <!-- Paciente -->
                 <div class="col-md-6">
                     <label asp-for="PatientId" class="form-label fw-semibold">Paciente *</label>
                     <select asp-for="PatientId" class="form-select">
@@ -33,7 +32,6 @@
                     <span asp-validation-for="PatientId" class="text-danger small"></span>
                 </div>
 
-                <!-- Médico -->
                 <div class="col-md-6">
                     <label asp-for="DoctorId" class="form-label fw-semibold">Médico *</label>
                     <select asp-for="DoctorId" class="form-select">
@@ -46,28 +44,24 @@
                     <span asp-validation-for="DoctorId" class="text-danger small"></span>
                 </div>
 
-                <!-- Fecha -->
                 <div class="col-md-6">
                     <label asp-for="Date" class="form-label fw-semibold">Fecha *</label>
                     <input asp-for="Date" type="date" class="form-control" min="@DateTime.Today.ToString("yyyy-MM-dd")" />
                     <span asp-validation-for="Date" class="text-danger small"></span>
                 </div>
 
-                <!-- Hora -->
                 <div class="col-md-6">
                     <label asp-for="Time" class="form-label fw-semibold">Hora *</label>
                     <input asp-for="Time" type="time" class="form-control" />
                     <span asp-validation-for="Time" class="text-danger small"></span>
                 </div>
 
-                <!-- Razón -->
                 <div class="col-12">
                     <label asp-for="Reason" class="form-label fw-semibold">Motivo de la consulta</label>
                     <textarea asp-for="Reason" class="form-control" rows="3" placeholder="Describa el motivo de la consulta...">@Model.Reason</textarea>
                     <span asp-validation-for="Reason" class="text-danger small"></span>
                 </div>
-
-                <!-- Estado (solo lectura) -->
+                
                 <div class="col-md-6">
                     <label class="form-label fw-semibold">Estado actual</label>
                     <div class="form-control bg-light">

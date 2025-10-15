@@ -119,7 +119,6 @@
         </div>
     </div>
 
-    <!-- Tarjetas de Pacientes -->
     <div class="row g-4">
         @foreach (var patient in Model)
         {
@@ -189,7 +188,6 @@
     }
 </div>
 
-<!-- Modal de confirmación -->
 <div class="modal fade" id="deleteModal" tabindex="-1">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content border-0 shadow">
@@ -221,7 +219,7 @@
 </div>
 
 @section Scripts {
-<script>
+    <script>
     function confirmDelete(id, name) {
         const modalText = document.getElementById("modalText");
         const form = document.getElementById("deleteForm");
@@ -233,7 +231,7 @@
         modal.show();
     }
 </script>
-
+}
 <style>
     .patient-card {
         transition: all 0.3s ease;
