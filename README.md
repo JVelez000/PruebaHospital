@@ -95,21 +95,27 @@ https://localhost:7000
 
 ## 📸 What It Looks Like
 <!-- TITLE HERE -->
+#Landing Page Preview #1
 ![Screenshot 1](ScreenShots/Imagen%20pegada.png)
 
 <!-- TITLE HERE -->
+#Landing Page Preview #2
 ![Screenshot 2](ScreenShots/Imagen%20pegada%20(2).png)
 
 <!-- TITLE HERE -->
+#Management of Pacients
 ![Screenshot 3](ScreenShots/Imagen%20pegada%20(3).png)
 
 <!-- TITLE HERE -->
+#Management of Doctors
 ![Screenshot 4](ScreenShots/Imagen%20pegada%20(4).png)
 
 <!-- TITLE HERE -->
+#Management of Appointments
 ![Screenshot 5](ScreenShots/Imagen%20pegada%20(5).png)
 
 <!-- TITLE HERE -->
+#Email Capture
 ![Screenshot 6](ScreenShots/Imagen%20pegada%20(6).png)
 
 ## 🔒 Security & Validations
