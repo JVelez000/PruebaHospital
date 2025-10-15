@@ -1,0 +1,84 @@
+@model PruebaHospital.Models.Doctor
+
+@{
+    ViewData["Title"] = "Agregar Médico";
+}
+
+<div class="container">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h1 class="h2 text-success">
+            <i class="bi bi-person-plus me-2"></i>Agregar Nuevo Médico
+        </h1>
+        <a asp-action="Index" class="btn btn-outline-secondary">
+            <i class="bi bi-arrow-left me-1"></i>Volver a la lista
+        </a>
+    </div>
+
+    <div class="card shadow-sm">
+        <div class="card-body">
+            <form asp-action="Create" method="post" class="row g-3">
+                @Html.AntiForgeryToken()
+                
+                <div class="col-md-6">
+                    <label asp-for="Document" class="form-label fw-semibold">Documento *</label>
+                    <input asp-for="Document" class="form-control" placeholder="Número de documento" />
+                    <span asp-validation-for="Document" class="text-danger small"></span>
+                </div>
+
+                <div class="col-md-6">
+                    <label asp-for="Name" class="form-label fw-semibold">Nombre Completo *</label>
+                    <input asp-for="Name" class="form-control" placeholder="Ingrese el nombre completo" />
+                    <span asp-validation-for="Name" class="text-danger small"></span>
+                </div>
+
+                <div class="col-md-6">
+                    <label asp-for="Speciality" class="form-label fw-semibold">Especialidad *</label>
+                    <input asp-for="Speciality" class="form-control" placeholder="Ej: Cardiología, Pediatría, etc." />
+                    <span asp-validation-for="Speciality" class="text-danger small"></span>
+                </div>
+
+                <div class="col-md-6">
+                    <label asp-for="Email" class="form-label fw-semibold">Correo Electrónico *</label>
+                    <input asp-for="Email" type="email" class="form-control" placeholder="ejemplo@hospital.com" />
+                    <span asp-validation-for="Email" class="text-danger small"></span>
+                </div>
+
+                <div class="col-md-6">
+                    <label asp-for="Phone" class="form-label fw-semibold">Teléfono *</label>
+                    <input asp-for="Phone" class="form-control" placeholder="10 dígitos (ej: 5512345678)" />
+                    <span asp-validation-for="Phone" class="text-danger small"></span>
+                    <div class="form-text">Formato: 10 dígitos sin espacios</div>
+                </div>
+
+                <div class="col-12 mt-4">
+                    <div class="d-flex gap-2">
+                        <button type="submit" class="btn btn-success">
+                            <i class="bi bi-check-circle me-1"></i>Guardar Médico
+                        </button>
+                        <a asp-action="Index" class="btn btn-outline-secondary">
+                            <i class="bi bi-x-circle me-1"></i>Cancelar
+                        </a>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="alert alert-info mt-4">
+        <h6 class="alert-heading"><i class="bi bi-info-circle me-1"></i>Campos requeridos</h6>
+        <small class="mb-0">
+            Los campos marcados con (*) son obligatorios. El documento debe ser único y no puede haber 
+            médicos con el mismo nombre y especialidad.
+        </small>
+    </div>
+</div>
+
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+<script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        document.getElementById('Document').focus();
+    });
+</script>

@@ -1,0 +1,280 @@
+@{
+ViewData["Title"] = "Hospital San Vicente";
+}
+
+<!-- Hero Section -->
+<div class="hero-section bg-gradient-primary">
+    <div class="container">
+        <div class="row align-items-center min-vh-80">
+            <div class="col-lg-6">
+                <h1 class="display-4 fw-bold text-white mb-4">
+                    <i class="bi bi-heart-pulse me-3"></i>Hospital San Vicente
+                </h1>
+                <p class="lead text-white-80 mb-4">
+                    Sistema de gestión integral que transforma la experiencia hospitalaria.
+                    Digitalizamos y optimizamos todos los procesos médicos y administrativos.
+                </p>
+                <div class="d-flex gap-3 flex-wrap">
+                    <a href="@Url.Action("Index", "Patients")" class="btn btn-light btn-lg px-4">
+                        <i class="bi bi-arrow-right me-2"></i>Comenzar
+                    </a>
+                    <a href="#features" class="btn btn-outline-light btn-lg px-4">
+                        <i class="bi bi-info-circle me-2"></i>Más Info
+                    </a>
+                </div>
+            </div>
+            <div class="col-lg-6 text-center">
+                <div class="hero-image">
+                    <i class="bi bi-hospital display-1 text-white opacity-75"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Stats Section -->
+<div class="bg-white py-5">
+    <div class="container">
+        <div class="row g-4 text-center">
+            <div class="col-md-3">
+                <div class="stat-card">
+                    <i class="bi bi-people-fill display-4 text-primary mb-3"></i>
+                    <h2 class="text-primary fw-bold" id="patientsCount">0</h2>
+                    <p class="text-muted mb-0">Pacientes Registrados</p>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="stat-card">
+                    <i class="bi bi-heart-pulse display-4 text-success mb-3"></i>
+                    <h2 class="text-success fw-bold" id="doctorsCount">0</h2>
+                    <p class="text-muted mb-0">Médicos Especialistas</p>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="stat-card">
+                    <i class="bi bi-calendar-check display-4 text-warning mb-3"></i>
+                    <h2 class="text-warning fw-bold" id="appointmentsCount">0</h2>
+                    <p class="text-muted mb-0">Citas Programadas</p>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="stat-card">
+                    <i class="bi bi-award display-4 text-info mb-3"></i>
+                    <h2 class="text-info fw-bold" id="specialtiesCount">0</h2>
+                    <p class="text-muted mb-0">Especialidades</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Features Section -->
+<div id="features" class="py-5 bg-light">
+    <div class="container">
+        <div class="text-center mb-5">
+            <h2 class="display-5 fw-bold text-dark mb-3">Módulos del Sistema</h2>
+            <p class="lead text-muted">Gestiona todas las áreas de tu hospital de forma eficiente</p>
+        </div>
+
+        <div class="row g-4">
+            <!-- Pacientes Card -->
+            <div class="col-lg-4">
+                <div class="feature-card card border-0 shadow-hover h-100">
+                    <div class="card-body text-center p-4">
+                        <div class="feature-icon bg-primary bg-opacity-10 rounded-circle mx-auto mb-4">
+                            <i class="bi bi-people-fill text-primary display-5"></i>
+                        </div>
+                        <h3 class="h4 text-primary mb-3">Gestión de Pacientes</h3>
+                        <p class="text-muted mb-4">
+                            Administra la información de pacientes de manera segura y organizada.
+                            Registro completo con validaciones inteligentes.
+                        </p>
+                        <ul class="list-unstyled text-start text-muted mb-4">
+                            <li class="mb-2"><i class="bi bi-check-circle text-success me-2"></i>Registro y edición</li>
+                            <li class="mb-2"><i class="bi bi-check-circle text-success me-2"></i>Documento único</li>
+                            <li class="mb-2"><i class="bi bi-check-circle text-success me-2"></i>Búsqueda avanzada</li>
+                        </ul>
+                        <a href="@Url.Action("Index", "Patients")" class="btn btn-primary btn-lg w-100">
+                            <i class="bi bi-arrow-right me-2"></i>Acceder
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Médicos Card -->
+            <div class="col-lg-4">
+                <div class="feature-card card border-0 shadow-hover h-100">
+                    <div class="card-body text-center p-4">
+                        <div class="feature-icon bg-success bg-opacity-10 rounded-circle mx-auto mb-4">
+                            <i class="bi bi-heart-pulse text-success display-5"></i>
+                        </div>
+                        <h3 class="h4 text-success mb-3">Gestión de Médicos</h3>
+                        <p class="text-muted mb-4">
+                            Controla el personal médico y sus especialidades.
+                            Filtrado inteligente y validaciones de duplicidad.
+                        </p>
+                        <ul class="list-unstyled text-start text-muted mb-4">
+                            <li class="mb-2"><i class="bi bi-check-circle text-success me-2"></i>Gestión por especialidad</li>
+                            <li class="mb-2"><i class="bi bi-check-circle text-success me-2"></i>Validaciones únicas</li>
+                            <li class="mb-2"><i class="bi bi-check-circle text-success me-2"></i>Filtrado avanzado</li>
+                        </ul>
+                        <a href="@Url.Action("Index", "Doctors")" class="btn btn-success btn-lg w-100">
+                            <i class="bi bi-arrow-right me-2"></i>Acceder
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Citas Card -->
+            <div class="col-lg-4">
+                <div class="feature-card card border-0 shadow-hover h-100">
+                    <div class="card-body text-center p-4">
+                        <div class="feature-icon bg-warning bg-opacity-10 rounded-circle mx-auto mb-4">
+                            <i class="bi bi-calendar-check text-warning display-5"></i>
+                        </div>
+                        <h3 class="h4 text-warning mb-3">Citas Médicas</h3>
+                        <p class="text-muted mb-4">
+                            Sistema inteligente de agendamiento.
+                            Evita conflictos y envía confirmaciones automáticas.
+                        </p>
+                        <ul class="list-unstyled text-start text-muted mb-4">
+                            <li class="mb-2"><i class="bi bi-check-circle text-success me-2"></i>Sin conflictos de horario</li>
+                            <li class="mb-2"><i class="bi bi-check-circle text-success me-2"></i>Email automático</li>
+                            <li class="mb-2"><i class="bi bi-check-circle text-success me-2"></i>Múltiples estados</li>
+                        </ul>
+                        <a href="@Url.Action("Index", "Appointments")" class="btn btn-warning btn-lg w-100">
+                            <i class="bi bi-arrow-right me-2"></i>Acceder
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="py-5 bg-white">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-6">
+                <h2 class="display-6 fw-bold text-dark mb-4">Beneficios del Sistema</h2>
+                <div class="benefit-item d-flex mb-4">
+                    <div class="benefit-icon me-4">
+                        <i class="bi bi-shield-check display-6 text-primary"></i>
+                    </div>
+                    <div>
+                        <h4 class="h5 text-dark">Seguridad de Datos</h4>
+                        <p class="text-muted mb-0">Toda la información protegida con validaciones y backups automáticos.</p>
+                    </div>
+                </div>
+                <div class="benefit-item d-flex mb-4">
+                    <div class="benefit-icon me-4">
+                        <i class="bi bi-lightning-charge display-6 text-success"></i>
+                    </div>
+                    <div>
+                        <h4 class="h5 text-dark">Eficiencia Total</h4>
+                        <p class="text-muted mb-0">Reduce tiempos de gestión en un 70% con procesos automatizados.</p>
+                    </div>
+                </div>
+                <div class="benefit-item d-flex">
+                    <div class="benefit-icon me-4">
+                        <i class="bi bi-graph-up display-6 text-warning"></i>
+                    </div>
+                    <div>
+                        <h4 class="h5 text-dark">Crecimiento Escalable</h4>
+                        <p class="text-muted mb-0">Sistema preparado para el crecimiento de tu institución médica.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6 text-center">
+                <div class="benefits-visual">
+                    <div class="chart-container">
+                        <div class="chart-bar bg-primary mb-3" data-percentage="95">
+                            <div class="bar-fill"></div>
+                            <span class="bar-label">Eficiencia 95%</span>
+                        </div>
+                        <div class="chart-bar bg-success mb-3" data-percentage="98">
+                            <div class="bar-fill"></div>
+                            <span class="bar-label">Seguridad 98%</span>
+                        </div>
+                        <div class="chart-bar bg-warning mb-3" data-percentage="90">
+                            <div class="bar-fill"></div>
+                            <span class="bar-label">Satisfacción 90%</span>
+                        </div>
+                        <div class="chart-bar bg-info" data-percentage="85">
+                            <div class="bar-fill"></div>
+                            <span class="bar-label">Crecimiento 85%</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Styles {
+<link rel="stylesheet" href="~/css/landing.css" asp-append-version="true" />
+}
+
+@section Scripts {
+<script>
+    function animateCounter(elementId, target, duration = 2000) {
+        const element = document.getElementById(elementId);
+        let start = 0;
+        const increment = target / (duration / 16);
+
+        const timer = setInterval(() => {
+            start += increment;
+            if (start >= target) {
+                element.textContent = target;
+                clearInterval(timer);
+            } else {
+                element.textContent = Math.floor(start);
+            }
+        }, 16);
+    }
+
+    function animateCharts() {
+        const bars = document.querySelectorAll('.bar-fill');
+        bars.forEach(bar => {
+            const percentage = bar.parentElement.getAttribute('data-percentage');
+            setTimeout(() => {
+                bar.style.width = percentage + '%';
+            }, 500);
+        });
+    }
+
+    document.addEventListener('DOMContentLoaded', function() {
+        animateCounter('patientsCount', 156);
+        animateCounter('doctorsCount', 28);
+        animateCounter('appointmentsCount', 342);
+        animateCounter('specialtiesCount', 12);
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    animateCharts();
+                    observer.unobserve(entry.target);
+                }
+            });
+        });
+
+        const benefitsSection = document.querySelector('.benefits-visual');
+        if (benefitsSection) {
+            observer.observe(benefitsSection);
+        }
+
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    });
+</script>
+}

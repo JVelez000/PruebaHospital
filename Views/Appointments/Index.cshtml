@@ -1,0 +1,452 @@
+@model IEnumerable<PruebaHospital.Models.Appointment>
+
+@{
+    ViewData["Title"] = "Citas Médicas";
+}
+
+<nav class="navbar navbar-expand-lg navbar-glass shadow-lg sticky-top">
+    <div class="container">
+        <a class="navbar-brand fw-bold d-flex align-items-center" href="@Url.Action("Index", "Home")">
+            <div class="hospital-logo me-2">
+                <i class="bi bi-heart-pulse"></i>
+            </div>
+            <span class="brand-text">Hospital San Vicente</span>
+        </a>
+        
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarMain">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        
+        <div class="collapse navbar-collapse" id="navbarMain">
+            <ul class="navbar-nav mx-auto">
+                <li class="nav-item">
+                    <a class="nav-link nav-item-custom @(ViewContext.RouteData.Values["controller"]?.ToString() == "Home" ? "active" : "")" 
+                       href="@Url.Action("Index", "Home")">
+                        <i class="bi bi-house me-2"></i>
+                        <span>Inicio</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link nav-item-custom @(ViewContext.RouteData.Values["controller"]?.ToString() == "Patients" ? "active" : "")" 
+                       href="@Url.Action("Index", "Patients")">
+                        <i class="bi bi-people me-2"></i>
+                        <span>Pacientes</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link nav-item-custom @(ViewContext.RouteData.Values["controller"]?.ToString() == "Doctors" ? "active" : "")" 
+                       href="@Url.Action("Index", "Doctors")">
+                        <i class="bi bi-heart-pulse me-2"></i>
+                        <span>Médicos</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link nav-item-custom @(ViewContext.RouteData.Values["controller"]?.ToString() == "Appointments" ? "active" : "")" 
+                       href="@Url.Action("Index", "Appointments")">
+                        <i class="bi bi-calendar-check me-2"></i>
+                        <span>Citas</span>
+                    </a>
+                </li>
+            </ul>
+            
+            <div class="navbar-user d-flex align-items-center">
+                <div class="user-avatar bg-primary rounded-circle d-flex align-items-center justify-content-center me-2">
+                    <i class="bi bi-person-fill text-white"></i>
+                </div>
+                <span class="text-white fw-semibold">Sistema</span>
+            </div>
+        </div>
+    </div>
+</nav>
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/navbar.css" asp-append-version="true" />
+}
+
+<div class="container-fluid px-4">
+    <div class="row align-items-center py-4 mb-4 bg-light rounded-3">
+        <div class="col">
+            <div class="d-flex align-items-center">
+                <div class="bg-warning rounded-circle p-3 me-3">
+                    <i class="bi bi-calendar-check text-white fs-2"></i>
+                </div>
+                <div>
+                    <h1 class="h2 text-warning mb-1">Gestión de Citas Médicas</h1>
+                    <p class="text-muted mb-0">Sistema inteligente de agendamiento y seguimiento</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-auto">
+            <a href="@Url.Action("Create")" class="btn btn-warning btn-lg">
+                <i class="bi bi-plus-circle me-2"></i>Nueva Cita
+            </a>
+        </div>
+    </div>
+
+    @if (ViewBag.Statistics != null)
+    {
+        <div class="row g-3 mb-4">
+            <div class="col-md-2">
+                <div class="card border-0 bg-primary text-white shadow-sm">
+                    <div class="card-body text-center py-3">
+                        <i class="bi bi-clock-history display-6 mb-2"></i>
+                        <h3 class="mb-1">@ViewBag.Statistics[PruebaHospital.Models.AppointmentStatus.Pendiente]</h3>
+                        <p class="mb-0 fs-7">Pendientes</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="card border-0 bg-info text-white shadow-sm">
+                    <div class="card-body text-center py-3">
+                        <i class="bi bi-check-circle display-6 mb-2"></i>
+                        <h3 class="mb-1">@ViewBag.Statistics[PruebaHospital.Models.AppointmentStatus.Confirmada]</h3>
+                        <p class="mb-0 fs-7">Confirmadas</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="card border-0 bg-success text-white shadow-sm">
+                    <div class="card-body text-center py-3">
+                        <i class="bi bi-check2-square display-6 mb-2"></i>
+                        <h3 class="mb-1">@ViewBag.Statistics[PruebaHospital.Models.AppointmentStatus.Atendida]</h3>
+                        <p class="mb-0 fs-7">Atendidas</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="card border-0 bg-danger text-white shadow-sm">
+                    <div class="card-body text-center py-3">
+                        <i class="bi bi-x-circle display-6 mb-2"></i>
+                        <h3 class="mb-1">@ViewBag.Statistics[PruebaHospital.Models.AppointmentStatus.Cancelada]</h3>
+                        <p class="mb-0 fs-7">Canceladas</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="card border-0 bg-secondary text-white shadow-sm">
+                    <div class="card-body text-center py-3">
+                        <i class="bi bi-person-x display-6 mb-2"></i>
+                        <h3 class="mb-1">@ViewBag.Statistics[PruebaHospital.Models.AppointmentStatus.NoAsistio]</h3>
+                        <p class="mb-0 fs-7">No Asistió</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="card border-0 bg-dark text-white shadow-sm">
+                    <div class="card-body text-center py-3">
+                        <i class="bi bi-calendar-week display-6 mb-2"></i>
+                        <h3 class="mb-1">@Model.Count()</h3>
+                        <p class="mb-0 fs-7">Total</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+
+    <!-- Filtros Mejorados -->
+    <div class="card border-0 shadow-sm mb-4">
+        <div class="card-header bg-white">
+            <h5 class="card-title mb-0 text-primary">
+                <i class="bi bi-funnel me-2"></i>Filtros de Citas
+            </h5>
+        </div>
+        <div class="card-body">
+            <div class="d-flex flex-wrap gap-2">
+                <a href="@Url.Action("Index", new { filter = "all" })" class="btn btn-outline-primary">
+                    <i class="bi bi-list me-1"></i>Todas
+                </a>
+                <a href="@Url.Action("Index", new { filter = "today" })" class="btn btn-outline-primary">
+                    <i class="bi bi-sun me-1"></i>Hoy
+                </a>
+                <a href="@Url.Action("Index", new { filter = "upcoming" })" class="btn btn-outline-info">
+                    <i class="bi bi-arrow-right me-1"></i>Próximas
+                </a>
+                <a href="@Url.Action("Index", new { filter = "pending" })" class="btn btn-outline-warning">
+                    <i class="bi bi-clock me-1"></i>Pendientes
+                </a>
+                <a href="@Url.Action("Index", new { filter = "confirmed" })" class="btn btn-outline-success">
+                    <i class="bi bi-check-lg me-1"></i>Confirmadas
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Tarjetas de Citas -->
+    <div class="row g-4">
+        @foreach (var appointment in Model)
+        {
+            <div class="col-xl-6 col-lg-6 col-md-6">
+                <div class="card appointment-card border-0 shadow-sm h-100">
+                    <div class="card-body">
+                        <!-- Header de la cita -->
+                        <div class="d-flex justify-content-between align-items-start mb-3">
+                            <div>
+                                <h5 class="card-title text-primary mb-1">@appointment.FormattedDate</h5>
+                                <p class="text-muted mb-0">
+                                    <i class="bi bi-clock me-1"></i>@appointment.FormattedTime
+                                </p>
+                            </div>
+                            <div class="text-end">
+                                <span class="badge @appointment.StatusBadgeClass fs-7">@appointment.StatusDisplay</span>
+                                <div class="mt-1">
+                                    @if (appointment.EmailSent)
+                                    {
+                                        <span class="badge bg-success fs-8" title="Enviado el @appointment.EmailSentAt?.ToString("dd/MM/yyyy HH:mm")">
+                                            <i class="bi bi-check-circle me-1"></i>Email
+                                        </span>
+                                    }
+                                    else
+                                    {
+                                        <span class="badge bg-secondary fs-8">
+                                            <i class="bi bi-x-circle me-1"></i>Sin email
+                                        </span>
+                                    }
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Información del paciente y médico -->
+                        <div class="appointment-info mb-3">
+                            <div class="row g-2">
+                                <div class="col-6">
+                                    <div class="bg-light rounded p-2">
+                                        <small class="text-muted d-block">PACIENTE</small>
+                                        @if (appointment.Patient != null)
+                                        {
+                                            <strong class="text-dark">@appointment.Patient.FullName</strong>
+                                            <small class="text-muted d-block">@appointment.Patient.Document</small>
+                                        }
+                                        else
+                                        {
+                                            <span class="text-danger">No encontrado</span>
+                                        }
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="bg-light rounded p-2">
+                                        <small class="text-muted d-block">MÉDICO</small>
+                                        @if (appointment.Doctor != null)
+                                        {
+                                            <strong class="text-dark">@appointment.Doctor.Name</strong>
+                                            <span class="badge bg-info fs-8">@appointment.Doctor.Speciality</span>
+                                        }
+                                        else
+                                        {
+                                            <span class="text-danger">No encontrado</span>
+                                        }
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Acciones -->
+                        <div class="appointment-actions pt-3 border-top">
+                            <div class="btn-group w-100" role="group">
+                                <a href="@Url.Action("Details", new { id = appointment.Id })" 
+                                   class="btn btn-outline-primary btn-sm">
+                                    <i class="bi bi-eye me-1"></i>Detalles
+                                </a>
+                                
+                                <div class="btn-group" role="group">
+                                    <button type="button" class="btn btn-outline-secondary btn-sm dropdown-toggle" 
+                                            data-bs-toggle="dropdown">
+                                        <i class="bi bi-gear me-1"></i>Estado
+                                    </button>
+                                    <ul class="dropdown-menu">
+                                        @if (appointment.Status != PruebaHospital.Models.AppointmentStatus.Atendida)
+                                        {
+                                            <li>
+                                                <form method="post" action="@Url.Action("MarkAsAttended", new { id = appointment.Id })">
+                                                    @Html.AntiForgeryToken()
+                                                    <button type="submit" class="dropdown-item text-success">
+                                                        <i class="bi bi-check-circle me-1"></i>Atendida
+                                                    </button>
+                                                </form>
+                                            </li>
+                                        }
+                                        @if (appointment.Status != PruebaHospital.Models.AppointmentStatus.Confirmada)
+                                        {
+                                            <li>
+                                                <form method="post" action="@Url.Action("Confirm", new { id = appointment.Id })">
+                                                    @Html.AntiForgeryToken()
+                                                    <button type="submit" class="dropdown-item text-info">
+                                                        <i class="bi bi-check-lg me-1"></i>Confirmar
+                                                    </button>
+                                                </form>
+                                            </li>
+                                        }
+                                        @if (appointment.Status != PruebaHospital.Models.AppointmentStatus.Cancelada)
+                                        {
+                                            <li>
+                                                <button type="button" class="dropdown-item text-danger" 
+                                                        data-bs-toggle="modal" data-bs-target="#cancelModal@(appointment.Id)">
+                                                    <i class="bi bi-x-circle me-1"></i>Cancelar
+                                                </button>
+                                            </li>
+                                        }
+                                        @if (appointment.Status != PruebaHospital.Models.AppointmentStatus.NoAsistio)
+                                        {
+                                            <li>
+                                                <form method="post" action="@Url.Action("MarkAsNoShow", new { id = appointment.Id })">
+                                                    @Html.AntiForgeryToken()
+                                                    <button type="submit" class="dropdown-item text-warning">
+                                                        <i class="bi bi-person-x me-1"></i>No Asistió
+                                                    </button>
+                                                </form>
+                                            </li>
+                                        }
+                                    </ul>
+                                </div>
+
+                                <a href="@Url.Action("Edit", new { id = appointment.Id })" 
+                                   class="btn btn-outline-warning btn-sm">
+                                    <i class="bi bi-pencil me-1"></i>Editar
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Modal de cancelación -->
+            <div class="modal fade" id="cancelModal@(appointment.Id)" tabindex="-1">
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content border-0 shadow">
+                        <div class="modal-header bg-danger text-white">
+                            <h5 class="modal-title">
+                                <i class="bi bi-x-circle me-2"></i>
+                                Cancelar Cita
+                            </h5>
+                            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                        </div>
+                        <form method="post" action="@Url.Action("Cancel", new { id = appointment.Id })">
+                            @Html.AntiForgeryToken()
+                            <div class="modal-body">
+                                <div class="text-center mb-3">
+                                    <i class="bi bi-calendar-x text-danger display-4"></i>
+                                </div>
+                                <p class="text-center">¿Está seguro de cancelar la cita programada para el <strong>@appointment.FormattedDateTime</strong>?</p>
+                                <div class="mb-3">
+                                    <label for="reason@(appointment.Id)" class="form-label">Razón de cancelación (opcional):</label>
+                                    <textarea class="form-control" id="reason@(appointment.Id)" name="reason" rows="3" 
+                                              placeholder="Ingrese la razón de cancelación..."></textarea>
+                                </div>
+                            </div>
+                            <div class="modal-footer border-0">
+                                <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
+                                    <i class="bi bi-x-circle me-1"></i>Cerrar
+                                </button>
+                                <button type="submit" class="btn btn-danger">
+                                    <i class="bi bi-x-circle me-1"></i>Confirmar Cancelación
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+
+    @if (!Model.Any())
+    {
+        <div class="text-center py-5">
+            <div class="bg-light rounded-3 p-5">
+                <i class="bi bi-calendar-x display-1 text-muted mb-3"></i>
+                <h3 class="text-muted">No hay citas programadas</h3>
+                <p class="text-muted mb-4">Comienza agendando la primera cita médica</p>
+                <a href="@Url.Action("Create")" class="btn btn-warning btn-lg">
+                    <i class="bi bi-plus-circle me-2"></i>Agendar Primera Cita
+                </a>
+            </div>
+        </div>
+    }
+</div>
+
+@section Scripts {
+    <script>
+        function confirmDelete(id, datetime) {
+            const modalText = document.getElementById("modalText");
+            const form = document.getElementById("deleteForm");
+            
+            modalText.textContent = `¿Deseas eliminar la cita programada para el ${datetime}?`;
+            form.action = `/Appointments/Delete/${id}`;
+            
+            const modal = new bootstrap.Modal(document.getElementById('deleteModal'));
+            modal.show();
+        }
+        
+        document.addEventListener('DOMContentLoaded', function() {
+            const successMessage = '@TempData["SuccessMessage"]';
+            const errorMessage = '@TempData["ErrorMessage"]';
+            
+            if (successMessage) {
+                showToast('Éxito', successMessage, 'success');
+            }
+            
+            if (errorMessage) {
+                showToast('Error', errorMessage, 'danger');
+            }
+        });
+
+        function showToast(title, message, type) {
+            const toastContainer = document.getElementById('toastContainer') || createToastContainer();
+            const toastId = 'toast-' + Date.now();
+            
+            const toastHTML = `
+                <div id="${toastId}" class="toast align-items-center text-bg-${type} border-0" role="alert">
+                    <div class="d-flex">
+                        <div class="toast-body">
+                            <strong>${title}:</strong> ${message}
+                        </div>
+                        <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"></button>
+                    </div>
+                </div>
+            `;
+            
+            toastContainer.innerHTML += toastHTML;
+            
+            const toastElement = document.getElementById(toastId);
+            const toast = new bootstrap.Toast(toastElement);
+            toast.show();
+            
+            toastElement.addEventListener('hidden.bs.toast', function () {
+                toastElement.remove();
+            });
+        }
+
+        function createToastContainer() {
+            const container = document.createElement('div');
+            container.id = 'toastContainer';
+            container.className = 'toast-container position-fixed top-0 end-0 p-3';
+            container.style.zIndex = '9999';
+            document.body.appendChild(container);
+            return container;
+        }
+    </script>
+
+<style>
+    .appointment-card {
+        transition: all 0.3s ease;
+        border: 1px solid #e9ecef;
+    }
+    
+    .appointment-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 25px rgba(0,0,0,0.15) !important;
+        border-color: #ffc107;
+    }
+    
+    .appointment-info {
+        background: #f8f9fa;
+        border-radius: 8px;
+        padding: 10px;
+    }
+    
+    .appointment-actions .btn {
+        border-radius: 6px;
+        font-weight: 500;
+    }
+    
+    .fs-7 { font-size: 0.875rem; }
+    .fs-8 { font-size: 0.75rem; }
+</style>

@@ -1,0 +1,219 @@
+@model PruebaHospital.Models.Appointment
+
+@{
+    ViewData["Title"] = "Detalles de la Cita";
+}
+
+<div class="container">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h1 class="h2 text-warning">
+            <i class="bi bi-calendar-event me-2"></i>Detalles de la Cita
+        </h1>
+        <a asp-action="Index" class="btn btn-outline-secondary">
+            <i class="bi bi-arrow-left me-1"></i>Volver al Listado
+        </a>
+    </div>
+
+    <div class="card shadow-sm">
+        <div class="card-header bg-light">
+            <h5 class="card-title mb-0">
+                <i class="bi bi-info-circle me-2"></i>Información de la Cita
+            </h5>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <label class="form-label fw-semibold text-muted">Fecha y Hora</label>
+                    <p class="fs-5 fw-bold text-warning">@Model.FormattedDateTime</p>
+                </div>
+                
+                <div class="col-md-6 mb-3">
+                    <label class="form-label fw-semibold text-muted">Estado</label>
+                    <div>
+                        <span class="badge @Model.StatusBadgeClass fs-6">@Model.StatusDisplay</span>
+                    </div>
+                </div>
+                
+                <div class="col-md-6 mb-3">
+                    <label class="form-label fw-semibold text-muted">Paciente</label>
+                    @if (Model.Patient != null)
+                    {
+                        <p class="fs-6">
+                            <strong>@Model.Patient.FullName</strong><br>
+                            <small class="text-muted">Documento: @Model.Patient.Document</small><br>
+                            <small class="text-muted">Email: @Model.Patient.Email</small><br>
+                            <small class="text-muted">Teléfono: @Model.Patient.Phone</small>
+                        </p>
+                    }
+                    else
+                    {
+                        <p class="text-danger">Paciente no encontrado</p>
+                    }
+                </div>
+                
+                <div class="col-md-6 mb-3">
+                    <label class="form-label fw-semibold text-muted">Médico</label>
+                    @if (Model.Doctor != null)
+                    {
+                        <p class="fs-6">
+                            <strong>@Model.Doctor.Name</strong><br>
+                            <span class="badge bg-info">@Model.Doctor.Speciality</span><br>
+                            <small class="text-muted">Documento: @Model.Doctor.Document</small><br>
+                            <small class="text-muted">Email: @Model.Doctor.Email</small>
+                        </p>
+                    }
+                    else
+                    {
+                        <p class="text-danger">Médico no encontrado</p>
+                    }
+                </div>
+                
+                <div class="col-12 mb-3">
+                    <label class="form-label fw-semibold text-muted">Motivo de la consulta</label>
+                    <p class="fs-6">@(string.IsNullOrEmpty(Model.Reason) ? "No especificado" : Model.Reason)</p>
+                </div>
+                
+                <div class="col-md-6 mb-3">
+                    <label class="form-label fw-semibold text-muted">Creado el</label>
+                    <p class="fs-6">@Model.CreatedAt.ToString("dd/MM/yyyy HH:mm")</p>
+                </div>
+
+                <div class="col-md-6 mb-3">
+                    <label class="form-label fw-semibold text-muted">Última actualización</label>
+                    <p class="fs-6">@(Model.UpdatedAt?.ToString("dd/MM/yyyy HH:mm") ?? "Sin actualizaciones")</p>
+                </div>
+                
+                <!-- 🔥 NUEVA SECCIÓN: GESTIÓN DE CORREOS -->
+                <div class="col-12">
+                    <div class="border rounded p-3 bg-light">
+                        <h6 class="fw-semibold text-muted mb-3">
+                            <i class="bi bi-envelope me-2"></i>Gestión de Correos Electrónicos
+                        </h6>
+                        
+                        <div class="row align-items-center">
+                            <div class="col-md-6">
+                                <div class="mb-2">
+                                    <label class="form-label fw-semibold text-muted mb-1">Estado del correo:</label>
+                                    <div>
+                                        @if (Model.EmailSent)
+                                        {
+                                            <span class="badge bg-success">
+                                                <i class="bi bi-check-circle me-1"></i>Enviado
+                                            </span>
+                                            <small class="text-muted d-block mt-1">
+                                                Último envío: @Model.EmailSentAt?.ToString("dd/MM/yyyy HH:mm")
+                                            </small>
+                                        }
+                                        else
+                                        {
+                                            <span class="badge bg-secondary">
+                                                <i class="bi bi-x-circle me-1"></i>No enviado
+                                            </span>
+                                        }
+                                    </div>
+                                </div>
+                                
+                                @if (!string.IsNullOrEmpty(Model.EmailStatus))
+                                {
+                                    <div>
+                                        <label class="form-label fw-semibold text-muted mb-1">Detalles:</label>
+                                        <p class="small text-muted mb-0">@Model.EmailStatus</p>
+                                    </div>
+                                }
+                            </div>
+                            
+                            <div class="col-md-6">
+                                <div class="d-flex gap-2 flex-wrap">
+                                    <form method="post" asp-action="ResendConfirmation" class="d-inline">
+                                        @Html.AntiForgeryToken()
+                                        <input type="hidden" name="id" value="@Model.Id" />
+                                        <button type="submit" class="btn btn-primary btn-sm">
+                                            <i class="bi bi-envelope-check me-1"></i> Reenviar Confirmación
+                                        </button>
+                                    </form>
+                                    
+                                    <form method="post" asp-action="SendReminder" class="d-inline">
+                                        @Html.AntiForgeryToken()
+                                        <input type="hidden" name="id" value="@Model.Id" />
+                                        <button type="submit" class="btn btn-warning btn-sm">
+                                            <i class="bi bi-bell me-1"></i> Enviar Recordatorio
+                                        </button>
+                                    </form>
+                                </div>
+                                
+                                <div class="mt-2">
+                                    <small class="text-muted">
+                                        <i class="bi bi-info-circle me-1"></i>
+                                        La confirmación se envía automáticamente al crear la cita
+                                    </small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="card-footer bg-light">
+            <div class="d-flex gap-2">
+                <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-warning">
+                    <i class="bi bi-pencil me-1"></i>Editar
+                </a>
+                <a asp-action="Index" class="btn btn-outline-secondary">
+                    <i class="bi bi-list me-1"></i>Volver al Listado
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const successMessage = '@TempData["SuccessMessage"]';
+            const errorMessage = '@TempData["ErrorMessage"]';
+            
+            if (successMessage) {
+                showToast('Éxito', successMessage, 'success');
+            }
+            
+            if (errorMessage) {
+                showToast('Error', errorMessage, 'danger');
+            }
+        });
+
+        function showToast(title, message, type) {
+            const toastContainer = document.getElementById('toastContainer') || createToastContainer();
+            const toastId = 'toast-' + Date.now();
+            
+            const toastHTML = `
+                <div id="${toastId}" class="toast align-items-center text-bg-${type} border-0" role="alert">
+                    <div class="d-flex">
+                        <div class="toast-body">
+                            <strong>${title}:</strong> ${message}
+                        </div>
+                        <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"></button>
+                    </div>
+                </div>
+            `;
+            
+            toastContainer.innerHTML += toastHTML;
+            
+            const toastElement = document.getElementById(toastId);
+            const toast = new bootstrap.Toast(toastElement);
+            toast.show();
+            
+            toastElement.addEventListener('hidden.bs.toast', function () {
+                toastElement.remove();
+            });
+        }
+
+        function createToastContainer() {
+            const container = document.createElement('div');
+            container.id = 'toastContainer';
+            container.className = 'toast-container position-fixed top-0 end-0 p-3';
+            container.style.zIndex = '9999';
+            document.body.appendChild(container);
+            return container;
+        }
+    </script>
+}

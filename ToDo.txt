@@ -1,0 +1,21 @@
+🧩 Orden ideal de desarrollo
+Fase	Carpeta	Qué contiene	Prioridad
+1️⃣	Models/	Patient, Doctor, Appointment, AppointmentStatus	🔥 Base del dominio (comenzamos aquí)
+2️⃣	Data/	AppDbContext, DbInitializer	🔥 Simula persistencia (en memoria)
+3️⃣	Repositories/	Interfaces + repos concretos	🔥 CRUD y separación de lógica
+4️⃣	Services/	Lógica de negocio + validaciones	✅ Mejora mantenibilidad
+5️⃣	Validators/	Validaciones con FluentValidation	⚙️ Buenas prácticas
+6️⃣	Controllers/	Manejo de flujo entre vista y servicio	💡 Conecta todo
+7️⃣	Views/	.cshtml para CRUD visual	🎨 Presentación (mínima pero funcional)
+8️⃣	Utils/	Helpers (Email, Fechas, Excepciones)	🧠 Complementos
+9️⃣	README + Diagramas	Documentación final	🏁 Cierre y puntos extra
+
+1 = Done
+2 = done
+3 = done
+4 = done
+5 = done
+6 = done
+7 = done
+8 = 
+9 = 

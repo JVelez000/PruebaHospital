@@ -1,0 +1,58 @@
+/* Tipografía base */
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: #f6f7f8;
+    color: #111618;
+}
+
+/* Encabezados */
+h1, h2, h3, h4, h5 {
+    font-weight: 700;
+}
+
+/* Botones */
+a, button {
+    transition: all 0.2s ease-in-out;
+}
+
+a:hover, button:hover {
+    transform: translateY(-1px);
+}
+
+/* Tabla */
+table {
+    border-collapse: separate;
+    border-spacing: 0;
+}
+
+thead {
+    background-color: #f3f4f6;
+}
+
+th, td {
+    padding: 0.75rem 1.5rem;
+    text-align: left;
+}
+
+tr:hover {
+    background-color: #f9fafb;
+}
+
+/* Colores de acciones */
+a.text-blue-600:hover { color: #2563eb; }
+a.text-yellow-500:hover { color: #d97706; }
+a.text-red-600:hover { color: #dc2626; }
+
+/* Card y contenedor */
+.container {
+    max-width: 1200px;
+}
+
+.shadow-lg {
+    box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1),
+    0 4px 6px -2px rgba(0,0,0,0.05);
+}
+
+.rounded-lg {
+    border-radius: 0.5rem;
+}
