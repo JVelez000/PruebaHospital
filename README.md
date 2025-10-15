@@ -132,7 +132,9 @@ https://localhost:7000
 - **Port already in use** → Change port or kill the process.
 
 ## 👨‍💻 Developer Info
-- **Name:** Jeims Velez  
+- **Name:** Jeims Velez
+- **Document Number:** 1015188992
+- **Clan:** Csharp
 - **Email:** jeims1221jeims@gmail.com  
 - **Development Date:** October 14, 2025  
 
